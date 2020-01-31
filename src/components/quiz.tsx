@@ -1,16 +1,38 @@
 import React from "react"
 import styled from "styled-components"
+import { QuizT } from "../types"
+import { ActiveQuiz } from "./active-quiz"
 
-type Props = {}
-
-export const Quiz: React.FC<Props> = () => {
-  return <QuizStyle>Quiz</QuizStyle>
+type Props = {
+  quizData: QuizT
 }
 
-const QuizStyle = styled.h1`
+export const Quiz: React.FC<Props> = ({ quizData }) => {
+  return (
+    <QuizStyle>
+      <ActiveQuizWrapper>
+        <QuizName>{quizData.title}</QuizName>
+        <ActiveQuiz />
+      </ActiveQuizWrapper>
+    </QuizStyle>
+  )
+}
+
+const QuizStyle = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   padding-top: 100px;
   flex-grow: 1;
   width: 100%;
+`
+
+const ActiveQuizWrapper = styled.div`
+  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  color: #fff;
+`
+const QuizName = styled.h1`
+  margin-bottom: 10px;
 `
