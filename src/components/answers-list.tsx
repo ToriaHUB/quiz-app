@@ -14,6 +14,7 @@ export const AnswerList: React.FC<Props> = ({ question, itemClick }) => {
     return () => {
       itemClick()
       setAnsweredId(answerId)
+      setTimeout(() => setAnsweredId(() => ""), 3000)
       //TODO: Add logic save result to store
     }
   }
