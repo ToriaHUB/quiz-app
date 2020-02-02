@@ -11,6 +11,8 @@ export const Quiz: React.FC<Props> = ({ quizData }) => {
   return (
     <QuizStyle>
       <QuizName>{quizData.title}</QuizName>
+      {/*TODO: Remove active quiz*/}
+      <ActiveQuiz />
     </QuizStyle>
   )
 }

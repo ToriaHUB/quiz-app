@@ -11,9 +11,9 @@ export type ActiveQuizState =  null | QuizT
         number: 1,
         title: "What is your favourite color",
         answers: [
-          { title: "red", isCorrect: true },
-          { title: "blue", isCorrect: false },
-          { title: "green", isCorrect: false }
+          { id: "1",title: "red", isCorrect: true },
+          { id: "2",title: "blue", isCorrect: false },
+          { id: "3",title: "green", isCorrect: false }
         ]
       },
       {
@@ -21,9 +21,9 @@ export type ActiveQuizState =  null | QuizT
         number: 2,
         title: "What is your dog favourite color",
         answers: [
-          { title: "red", isCorrect: false },
-          { title: "blue", isCorrect: false },
-          { title: "green", isCorrect: true }
+          { id: "4",title: "red", isCorrect: false },
+          { id: "5",title: "blue", isCorrect: false },
+          { id: "6",title: "green", isCorrect: true }
         ]
       }
     ], title: "Test"}

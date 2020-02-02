@@ -1,19 +1,37 @@
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
-import { AnswerT } from "../types"
+import { QuestionT } from "../types"
 import { AnswerItem } from "./answerItem"
 
 type Props = {
-  answers: AnswerT[]
+  question: QuestionT
   itemClick: () => void
 }
 
-export const AnswerList: React.FC<Props> = ({ answers, itemClick }) => {
+export const AnswerList: React.FC<Props> = ({ question, itemClick }) => {
+  const [answeredId, setAnsweredId] = useState<string>("")
+  const handleAnswerClick = (isCorrect: boolean, questionId: string, answerId: string) => {
+    return () => {
+      itemClick()
+      setAnsweredId(answerId)
+      //TODO: Add logic save result to store
+    }
+  }
+
   return (
     <List>
-      {answers.map((answer, index) => {
+      {question.answers.map((answer, index) => {
         //TODO: add isCorrect
-        return <AnswerItem key={index} title={answer.title} itemClick={itemClick} />
+        return (
+          <AnswerItem
+            key={index}
+            title={answer.title}
+            isCorrect={answer.isCorrect}
+            itemClick={handleAnswerClick(answer.isCorrect, question.id, answer.id)}
+            answeredId={answeredId}
+            ownId={answer.id}
+          />
+        )
       })}
     </List>
   )

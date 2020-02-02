@@ -37,7 +37,7 @@ export const ActiveQuiz: React.FC<Props> = () => {
               {activeQuiz.questions[currentQuestionIndex].number} из {activeQuiz.questions.length}
             </small>
           </Question>
-          <AnswerList answers={activeQuiz.questions[currentQuestionIndex].answers} itemClick={switchQuestion} />
+          <AnswerList question={activeQuiz.questions[currentQuestionIndex]} itemClick={switchQuestion} />
         </ActiveQuizStyle>
       </>
     )

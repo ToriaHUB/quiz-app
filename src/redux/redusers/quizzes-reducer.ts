@@ -12,21 +12,21 @@ export const initialQuizzesState = [
       {
         id: "questId1",
         number: 1,
-        title: "What is your favourite color",
+        title: "What is your name",
         answers: [
-          { title: "red", isCorrect: true },
-          { title: "blue", isCorrect: false },
-          { title: "green", isCorrect: false }
+          { id: "1", title: "Alex", isCorrect: true },
+          { id: "2", title: "Zuzka", isCorrect: false },
+          { id: "3", title: "Ann", isCorrect: false }
         ]
       },
       {
         id: "questId2",
         number: 2,
-        title: "What is your dog favourite color",
+        title: "What is your mather's name",
         answers: [
-          { title: "red", isCorrect: false },
-          { title: "blue", isCorrect: false },
-          { title: "green", isCorrect: true }
+          { id: "4", title: "Lucie", isCorrect: false },
+          { id: "5", title: "Alena", isCorrect: false },
+          { id: "6", title: "Marie", isCorrect: true }
         ]
       }
     ]
@@ -40,9 +40,9 @@ export const initialQuizzesState = [
         number: 1,
         title: "What is your name",
         answers: [
-          { title: "Alex", isCorrect: true },
-          { title: "Zuzka", isCorrect: false },
-          { title: "Ann", isCorrect: false }
+          { id: "1", title: "Alex", isCorrect: true },
+          { id: "2", title: "Zuzka", isCorrect: false },
+          { id: "3", title: "Ann", isCorrect: false }
         ]
       },
       {
@@ -50,9 +50,9 @@ export const initialQuizzesState = [
         number: 2,
         title: "What is your mather's name",
         answers: [
-          { title: "Lucie", isCorrect: false },
-          { title: "Alena", isCorrect: false },
-          { title: "Marie", isCorrect: true }
+          { id: "4", title: "Lucie", isCorrect: false },
+          { id: "5", title: "Alena", isCorrect: false },
+          { id: "6", title: "Marie", isCorrect: true }
         ]
       }
     ]
