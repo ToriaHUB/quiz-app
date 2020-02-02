@@ -2,37 +2,19 @@ import React from "react"
 import { Layout } from "./hoc/layout"
 import { Quiz } from "./components/quiz"
 import { GlobalStyles } from "./styles"
-
-const mockQuiz = {
-  title: "Favourite color",
-  questions: [
-    {
-      number: 1,
-      title: "What is your favourite color",
-      answers: [
-        { title: "red", isCorrect: true },
-        { title: "blue", isCorrect: false },
-        { title: "green", isCorrect: false }
-      ]
-    },
-    {
-      number: 2,
-      title: "What is your dog favourite color",
-      answers: [
-        { title: "red", isCorrect: false },
-        { title: "blue", isCorrect: false },
-        { title: "green", isCorrect: true }
-      ]
-    }
-  ]
-}
+import { useSelector } from "react-redux"
+import { StoreState } from "./redux"
+import { QuizT } from "./types"
 
 const App: React.FC = () => {
+  const quizzes = useSelector<StoreState, QuizT[]>(state => state.quizzes)
   return (
     <>
       <GlobalStyles />
       <Layout>
-        <Quiz quizData={mockQuiz} />
+        {quizzes.map((quiz, index) => (
+          <Quiz key={index} quizData={quiz} />
+        ))}
       </Layout>
     </>
   )

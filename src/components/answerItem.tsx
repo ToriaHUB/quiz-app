@@ -2,10 +2,11 @@ import React from "react"
 import styled from "styled-components"
 type Props = {
   title: string
+  itemClick: () => void
 }
 
-export const AnswerItem: React.FC<Props> = ({ title }) => {
-  return <Item>{title}</Item>
+export const AnswerItem: React.FC<Props> = ({ title, itemClick }) => {
+  return <Item onClick={itemClick}>{title}</Item>
 }
 
 const Item = styled.li`

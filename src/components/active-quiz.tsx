@@ -1,37 +1,48 @@
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 import { AnswerList } from "./answers-list"
-import { QuestionT } from "../types"
-
-const mockQuestion: QuestionT = {
-  number: 1,
-  title: "What is your favourite color",
-  answers: [
-    { title: "red", isCorrect: true },
-    { title: "blue", isCorrect: false },
-    { title: "green", isCorrect: false }
-  ]
-}
+import { QuizT } from "../types"
+import { useSelector } from "react-redux"
+import { StoreState } from "../redux"
 
 type Props = {}
 
 export const ActiveQuiz: React.FC<Props> = () => {
-  return (
-    <>
-      <ActiveQuizStyle>
-        <Question>
-          <span>
-            <strong>
-              {`${mockQuestion.number}. `}
-              {mockQuestion.title}
-            </strong>
-          </span>
-          <small>{mockQuestion.number} из 5</small>
-        </Question>
-        <AnswerList answers={mockQuestion.answers} />
-      </ActiveQuizStyle>
-    </>
-  )
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
+  const activeQuiz = useSelector<StoreState, QuizT | null>(state => state.activeQuiz)
+
+  const switchQuestion = () => {
+    setTimeout(() => {
+      if (activeQuiz && currentQuestionIndex < activeQuiz.questions.length - 1) {
+        setCurrentQuestionIndex(prevState => prevState + 1)
+      } else {
+        console.log("Result")
+        //TODO: add quiz result
+      }
+    }, 3000)
+  }
+
+  if (activeQuiz && activeQuiz.questions) {
+    return (
+      <>
+        <ActiveQuizStyle>
+          <Question>
+            <span>
+              <strong>
+                {`${activeQuiz.questions[currentQuestionIndex].number}. `}
+                {activeQuiz.questions[currentQuestionIndex].title}
+              </strong>
+            </span>
+            <small>
+              {activeQuiz.questions[currentQuestionIndex].number} из {activeQuiz.questions.length}
+            </small>
+          </Question>
+          <AnswerList answers={activeQuiz.questions[currentQuestionIndex].answers} itemClick={switchQuestion} />
+        </ActiveQuizStyle>
+      </>
+    )
+  }
+  return null
 }
 
 const ActiveQuizStyle = styled.div`

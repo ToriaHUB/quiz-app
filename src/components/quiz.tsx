@@ -10,10 +10,7 @@ type Props = {
 export const Quiz: React.FC<Props> = ({ quizData }) => {
   return (
     <QuizStyle>
-      <ActiveQuizWrapper>
-        <QuizName>{quizData.title}</QuizName>
-        <ActiveQuiz />
-      </ActiveQuizWrapper>
+      <QuizName>{quizData.title}</QuizName>
     </QuizStyle>
   )
 }
