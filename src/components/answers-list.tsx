@@ -1,7 +1,10 @@
 import React, { useState } from "react"
 import styled from "styled-components"
-import { QuestionT } from "../types"
+import { QuestionResultT, QuestionT } from "../types"
 import { AnswerItem } from "./answerItem"
+import { useDispatch } from "react-redux"
+import { Dispatch } from "redux"
+import { ActionType } from "../redux/types"
 
 type Props = {
   question: QuestionT
@@ -9,11 +12,21 @@ type Props = {
 }
 
 export const AnswerList: React.FC<Props> = ({ question, itemClick }) => {
+  const dispatch = useDispatch<Dispatch<ActionType<QuestionResultT>>>()
   const [answeredId, setAnsweredId] = useState<string>("")
   const handleAnswerClick = (isCorrect: boolean, questionId: string, answerId: string) => {
     return () => {
       itemClick()
       setAnsweredId(answerId)
+      dispatch({
+        type: "ADD_QUESTION_RESULTS",
+        data: {
+          questionNumber: question.number,
+          questionTitle: question.title,
+          questionId: questionId,
+          isCorrect: isCorrect
+        }
+      })
       setTimeout(() => setAnsweredId(() => ""), 3000)
       //TODO: Add logic save result to store
     }

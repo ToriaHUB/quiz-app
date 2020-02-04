@@ -1,14 +1,16 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 import { AnswerList } from "./answers-list"
-import { QuizT } from "../types"
-import { useSelector } from "react-redux"
 import { StoreState } from "../redux"
+import { FinishedQuiz } from "./finished-quiz"
+import { useSelector } from "react-redux"
+import { QuizT } from "../types"
 
 type Props = {}
 
 export const ActiveQuiz: React.FC<Props> = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
+  const [finishedQuiz, setFinishedQuiz] = useState(false)
   const activeQuiz = useSelector<StoreState, QuizT | null>(state => state.activeQuiz)
 
   const switchQuestion = () => {
@@ -16,8 +18,7 @@ export const ActiveQuiz: React.FC<Props> = () => {
       if (activeQuiz && currentQuestionIndex < activeQuiz.questions.length - 1) {
         setCurrentQuestionIndex(prevState => prevState + 1)
       } else {
-        console.log("Result")
-        //TODO: add quiz result
+        setFinishedQuiz(true)
       }
     }, 3000)
   }
@@ -25,20 +26,24 @@ export const ActiveQuiz: React.FC<Props> = () => {
   if (activeQuiz && activeQuiz.questions) {
     return (
       <>
-        <ActiveQuizStyle>
-          <Question>
-            <span>
-              <strong>
-                {`${activeQuiz.questions[currentQuestionIndex].number}. `}
-                {activeQuiz.questions[currentQuestionIndex].title}
-              </strong>
-            </span>
-            <small>
-              {activeQuiz.questions[currentQuestionIndex].number} из {activeQuiz.questions.length}
-            </small>
-          </Question>
-          <AnswerList question={activeQuiz.questions[currentQuestionIndex]} itemClick={switchQuestion} />
-        </ActiveQuizStyle>
+        {finishedQuiz ? (
+          <FinishedQuiz />
+        ) : (
+          <ActiveQuizStyle>
+            <Question>
+              <span>
+                <strong>
+                  {`${activeQuiz.questions[currentQuestionIndex].number}. `}
+                  {activeQuiz.questions[currentQuestionIndex].title}
+                </strong>
+              </span>
+              <small>
+                {activeQuiz.questions[currentQuestionIndex].number} из {activeQuiz.questions.length}
+              </small>
+            </Question>
+            <AnswerList question={activeQuiz.questions[currentQuestionIndex]} itemClick={switchQuestion} />
+          </ActiveQuizStyle>
+        )}
       </>
     )
   }
