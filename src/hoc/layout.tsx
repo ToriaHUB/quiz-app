@@ -13,9 +13,12 @@ export const Layout: React.FC<Props> = ({ children }) => {
   const handleIsOpen = () => {
     setIsDrawerVisible(!isDrawerVisible)
   }
+  const menuCloseHandler = () => {
+    setIsDrawerVisible(false)
+  }
   return (
     <LayoutStyle>
-      <Drawer isDrawerVisible={isDrawerVisible} />
+      <Drawer isDrawerVisible={isDrawerVisible} onClose={menuCloseHandler} />
       <MenuToggle setIsDrawerVisible={handleIsOpen} isDrawerVisible={isDrawerVisible} />
       <main>{children}</main>
     </LayoutStyle>

@@ -4,12 +4,14 @@ import { useSelector } from "react-redux"
 import { StoreState } from "../redux"
 import { QuizT } from "../types"
 import { theme } from "../styles/theme"
+import { Backdrop } from "./backdrop"
 
 type Props = {
   isDrawerVisible: boolean
+  onClose: () => void
 }
 
-export const Drawer: React.FC<Props> = ({ isDrawerVisible }) => {
+export const Drawer: React.FC<Props> = ({ isDrawerVisible, onClose }) => {
   const quizzes = useSelector<StoreState, QuizT[]>(state => state.quizzes)
 
   const renderLinks = () => {
@@ -21,9 +23,12 @@ export const Drawer: React.FC<Props> = ({ isDrawerVisible }) => {
   }
 
   return (
-    <Navigation isDrawerVisible={isDrawerVisible}>
-      <List>{renderLinks()}</List>
-    </Navigation>
+    <>
+      <Navigation isDrawerVisible={isDrawerVisible}>
+        <List>{renderLinks()}</List>
+      </Navigation>
+      {isDrawerVisible ? <Backdrop onClose={onClose} /> : null}
+    </>
   )
 }
 
