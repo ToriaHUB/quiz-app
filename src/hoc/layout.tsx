@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import styled from "styled-components"
 import { MenuToggle } from "../components/menu-toggle"
 import { theme } from "../styles/theme"
+import { Drawer } from "../components/drawer"
 
 type Props = {
   children: React.ReactNode
@@ -14,6 +15,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
   }
   return (
     <LayoutStyle>
+      <Drawer isDrawerVisible={isDrawerVisible} />
       <MenuToggle setIsDrawerVisible={handleIsOpen} isDrawerVisible={isDrawerVisible} />
       <main>{children}</main>
     </LayoutStyle>
