@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 import { QuestionResultT, QuestionT } from "../types"
-import { AnswerItem } from "./answerItem"
+import { AnswerItem } from "./answer-item"
 import { useDispatch } from "react-redux"
 import { Dispatch } from "redux"
 import { ActionType } from "../redux/types"
