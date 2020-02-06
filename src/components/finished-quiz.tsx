@@ -24,9 +24,9 @@ export const FinishedQuiz = () => {
   }
 
   return (
-    <>
-      <FinishQuizWrapper>
-        <List>
+    <FinishedQuizWrapper>
+      <ResultsContainer>
+        <QuestionList>
           {quizResults.map(answerResult => {
             return (
               <ListElement>
@@ -39,10 +39,10 @@ export const FinishedQuiz = () => {
               </ListElement>
             )
           })}
-        </List>
-        <Results>
+        </QuestionList>
+        <CountedResults>
           Right {rightAnswers} from {quizResults.length}
-        </Results>
+        </CountedResults>
         <ButtonWrapper>
           <Button color={"primary"} disabled={false} click={handleOnRetry}>
             Repeat
@@ -51,35 +51,37 @@ export const FinishedQuiz = () => {
             Back to quiz
           </Button>
         </ButtonWrapper>
-      </FinishQuizWrapper>
-    </>
+      </ResultsContainer>
+    </FinishedQuizWrapper>
   )
 }
-
-const FinishQuizWrapper = styled.div`
+const FinishedQuizWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+`
+const ResultsContainer = styled.div`
   padding: 20px;
   color: ${theme.color.white};
   border: 2px solid ${theme.color.white};
   border-radius: 5px;
-  margin: 0 10px;
   display: flex;
   flex-direction: column;
 `
-const List = styled.ul`
+const QuestionList = styled.ul`
   list-style: none;
-  padding: 0;
-  margin: 0;
 `
 const ListElement = styled.li``
+
 const Icon = styled(FontAwesomeIcon)`
   margin-left: 10px;
   color: ${props => props.color};
+`
+const CountedResults = styled.div`
+  margin: 10px 0;
 `
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-start;
   padding: 10px 0;
-`
-const Results = styled.div`
-  margin: 10px 0;
 `

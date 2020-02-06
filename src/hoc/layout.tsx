@@ -17,19 +17,22 @@ export const Layout: React.FC<Props> = ({ children }) => {
     setIsDrawerVisible(false)
   }
   return (
-    <LayoutStyle>
+    <LayoutContainer>
       <Drawer isDrawerVisible={isDrawerVisible} onClose={menuCloseHandler} />
       <MenuToggle setIsDrawerVisible={handleIsOpen} isDrawerVisible={isDrawerVisible} />
-      <main>{children}</main>
-    </LayoutStyle>
+      <ChildrenContainer>{children}</ChildrenContainer>
+    </LayoutContainer>
   )
 }
 
-export const LayoutStyle = styled.div`
+export const LayoutContainer = styled.div`
   display: flex;
   position: relative;
   justify-content: center;
   background-image: ${theme.gradient.universe};
   height: 100vh;
   width: 100vw;
+`
+export const ChildrenContainer = styled.main`
+  padding-top: 100px;
 `

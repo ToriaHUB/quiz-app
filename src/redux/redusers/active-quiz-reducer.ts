@@ -35,7 +35,7 @@ export const activeQuizReducer: Reducer<ActiveQuizState,ActionType<QuizT>>=(stat
       if(action.data){
         return {...state, ...action.data}
       }
-      console.error("Quiz data is empty")
+      console.error("Quizzes data is empty")
       return state
     case "CLEAR_ACTIVE_QUIZ":
       return null

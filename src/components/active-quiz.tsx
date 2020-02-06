@@ -29,26 +29,35 @@ export const ActiveQuiz: React.FC<Props> = () => {
         {finishedQuiz ? (
           <FinishedQuiz />
         ) : (
-          <ActiveQuizStyle>
-            <Question>
-              <span>
-                <strong>
-                  {`${activeQuiz.questions[currentQuestionIndex].number}. `}
-                  {activeQuiz.questions[currentQuestionIndex].title}
-                </strong>
-              </span>
-              <small>
-                {activeQuiz.questions[currentQuestionIndex].number} из {activeQuiz.questions.length}
-              </small>
-            </Question>
-            <AnswerList question={activeQuiz.questions[currentQuestionIndex]} itemClick={switchQuestion} />
-          </ActiveQuizStyle>
+          <ActiveQuizWrapper>
+            <ActiveQuizStyle>
+              <Question>
+                <span>
+                  <strong>
+                    {`${activeQuiz.questions[currentQuestionIndex].number}. `}
+                    {activeQuiz.questions[currentQuestionIndex].title}
+                  </strong>
+                </span>
+                <small>
+                  {activeQuiz.questions[currentQuestionIndex].number} из {activeQuiz.questions.length}
+                </small>
+              </Question>
+              <AnswerList question={activeQuiz.questions[currentQuestionIndex]} itemClick={switchQuestion} />
+            </ActiveQuizStyle>
+          </ActiveQuizWrapper>
         )}
       </>
     )
   }
   return null
 }
+
+const ActiveQuizWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  color: #fff;
+`
 
 const ActiveQuizStyle = styled.div`
   padding: 20px;

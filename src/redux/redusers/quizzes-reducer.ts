@@ -7,7 +7,7 @@ export type QuizzesState = QuizT[]
 export const initialQuizzesState = [
   {
     id: "quizId1",
-    title: "Quiz 1 ",
+    title: "Quizzes 1 ",
     questions: [
       {
         id: "questId1",
@@ -33,7 +33,7 @@ export const initialQuizzesState = [
   },
   {
     id: "quizId2",
-    title: "Quiz 2 ",
+    title: "Quizzes 2 ",
     questions: [
       {
         id: "questId1",
@@ -66,6 +66,7 @@ export const quizzesReducer: Reducer<QuizzesState, ActionType<QuizT[]>> = (state
         return [...state, ...action.data]
       }
       console.error("parameter not passed")
+      return state
 
     default:
       return state
