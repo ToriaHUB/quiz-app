@@ -28,14 +28,12 @@ export const AnswerList: React.FC<Props> = ({ question, itemClick }) => {
         }
       })
       setTimeout(() => setAnsweredId(() => ""), 3000)
-      //TODO: Add logic save result to store
     }
   }
 
   return (
     <List>
       {question.answers.map((answer, index) => {
-        //TODO: add isCorrect
         return (
           <AnswerItem
             key={index}

@@ -3,5 +3,6 @@ export const routes = {
   quizCreator: "/quiz-creator",
   quizzes: "/quizzes",
   activeQuiz: "/quiz/:id",
-  home: "/"
+  home: "/",
+  results: "/quiz-results"
 }

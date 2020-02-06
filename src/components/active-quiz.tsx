@@ -1,24 +1,31 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 import { AnswerList } from "./answers-list"
 import { StoreState } from "../redux"
-import { FinishedQuiz } from "./finished-quiz"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { QuizT } from "../types"
+import { useHistory, useParams } from "react-router"
 
 type Props = {}
 
 export const ActiveQuiz: React.FC<Props> = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
-  const [finishedQuiz, setFinishedQuiz] = useState(false)
-  const activeQuiz = useSelector<StoreState, QuizT | null>(state => state.activeQuiz)
+  const activeQuizId = useParams<{ id: string }>()
+  const activeQuiz = useSelector<StoreState, QuizT | null | undefined>(state =>
+    state.quizzes.find(quiz => quiz.id === activeQuizId.id)
+  )
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch({ type: "SET_ACTIVE_QUIZ", data: activeQuiz })
+  }, [activeQuiz, dispatch])
+  let history = useHistory()
 
   const switchQuestion = () => {
     setTimeout(() => {
       if (activeQuiz && currentQuestionIndex < activeQuiz.questions.length - 1) {
         setCurrentQuestionIndex(prevState => prevState + 1)
       } else {
-        setFinishedQuiz(true)
+        history.push("/quiz-results")
       }
     }, 3000)
   }
@@ -26,26 +33,22 @@ export const ActiveQuiz: React.FC<Props> = () => {
   if (activeQuiz && activeQuiz.questions) {
     return (
       <>
-        {finishedQuiz ? (
-          <FinishedQuiz />
-        ) : (
-          <ActiveQuizWrapper>
-            <ActiveQuizStyle>
-              <Question>
-                <span>
-                  <strong>
-                    {`${activeQuiz.questions[currentQuestionIndex].number}. `}
-                    {activeQuiz.questions[currentQuestionIndex].title}
-                  </strong>
-                </span>
-                <small>
-                  {activeQuiz.questions[currentQuestionIndex].number} из {activeQuiz.questions.length}
-                </small>
-              </Question>
-              <AnswerList question={activeQuiz.questions[currentQuestionIndex]} itemClick={switchQuestion} />
-            </ActiveQuizStyle>
-          </ActiveQuizWrapper>
-        )}
+        <ActiveQuizWrapper>
+          <ActiveQuizStyle>
+            <Question>
+              <span>
+                <strong>
+                  {`${activeQuiz.questions[currentQuestionIndex].number}. `}
+                  {activeQuiz.questions[currentQuestionIndex].title}
+                </strong>
+              </span>
+              <small>
+                {activeQuiz.questions[currentQuestionIndex].number} из {activeQuiz.questions.length}
+              </small>
+            </Question>
+            <AnswerList question={activeQuiz.questions[currentQuestionIndex]} itemClick={switchQuestion} />
+          </ActiveQuizStyle>
+        </ActiveQuizWrapper>
       </>
     )
   }

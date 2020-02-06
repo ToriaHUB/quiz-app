@@ -2,6 +2,8 @@ import React from "react"
 import styled from "styled-components"
 import { QuizT } from "../types"
 import { theme } from "../styles/theme"
+import { NavLink } from "react-router-dom"
+import { routes } from "../router"
 
 type Props = {
   quizzesData: QuizT[]
@@ -12,7 +14,9 @@ export const Quizzes: React.FC<Props> = ({ quizzesData }) => {
     <QuizzesWrapper>
       <Title>Quizzes list</Title>
       {quizzesData.map((quiz, index) => (
-        <QuizName key={index}>{quiz.title}</QuizName>
+        <QuizName key={index}>
+          <NavLinkStyled to={routes.activeQuiz.replace(":id", quiz.id)}>{quiz.title}</NavLinkStyled>
+        </QuizName>
       ))}
     </QuizzesWrapper>
   )
@@ -32,4 +36,14 @@ const QuizzesWrapper = styled.div`
 `
 const QuizName = styled.h2`
   margin: auto;
+`
+const NavLinkStyled = styled(NavLink)`
+  color: ${theme.color.white};
+  font-size: 30px;
+  text-decoration: none;
+  transition: opacity 0.3ms;
+  &:hover,
+  &:active {
+    opacity: 0.7;
+  }
 `

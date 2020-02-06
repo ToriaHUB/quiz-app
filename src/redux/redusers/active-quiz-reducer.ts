@@ -2,31 +2,10 @@ import { QuizT } from "../../types"
 import { Reducer } from "redux"
 import { ActionType } from "../types"
 
-export type ActiveQuizState =  null | QuizT
+export type ActiveQuizState = null | QuizT
 
 
- const initialActiveQuizState:ActiveQuizState={id: "ghgngh", questions:[
-      {
-        id: "questId1",
-        number: 1,
-        title: "What is your favourite color",
-        answers: [
-          { id: "1",title: "red", isCorrect: true },
-          { id: "2",title: "blue", isCorrect: false },
-          { id: "3",title: "green", isCorrect: false }
-        ]
-      },
-      {
-        id: "questId2",
-        number: 2,
-        title: "What is your dog favourite color",
-        answers: [
-          { id: "4",title: "red", isCorrect: false },
-          { id: "5",title: "blue", isCorrect: false },
-          { id: "6",title: "green", isCorrect: true }
-        ]
-      }
-    ], title: "Test"}
+ const initialActiveQuizState:ActiveQuizState = null
 
 
 export const activeQuizReducer: Reducer<ActiveQuizState,ActionType<QuizT>>=(state=initialActiveQuizState, action)=>{

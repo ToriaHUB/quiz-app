@@ -9,6 +9,7 @@ import { ActiveQuiz } from "../components/active-quiz"
 import { Auth } from "../auth/auth"
 import { QuizCreator } from "../quiz-creator/quiz-creator"
 import { Home } from "../components/home"
+import { FinishedQuiz } from "../components/finished-quiz"
 
 type Props = {
   children?: never
@@ -27,6 +28,7 @@ export const Router: React.FC<Props> = () => {
           <Route exact path={routes.activeQuiz} component={ActiveQuiz} />
           <Route exact path={routes.auth} component={Auth} />
           <Route exact path={routes.quizCreator} component={QuizCreator} />
+          <Route exact path={routes.results} component={FinishedQuiz} />
           <Redirect to="/" />
         </Switch>
       </BrowserRouter>

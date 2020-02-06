@@ -7,9 +7,13 @@ import { useDispatch, useSelector } from "react-redux"
 import { StoreState } from "../redux"
 import { QuizResultsT } from "../redux/redusers/quiz-rezults"
 import { Button } from "./button"
+import { useHistory } from "react-router"
+import { routes } from "../router"
 
 export const FinishedQuiz = () => {
+  const history = useHistory()
   const quizResults = useSelector<StoreState, QuizResultsT>(state => state.quizResults)
+  const activeQuizId = useSelector<StoreState, string | null>(state => state.activeQuiz.id)
   const dispatch = useDispatch()
 
   const rightAnswers = quizResults.reduce((total, answer) => {
@@ -21,6 +25,13 @@ export const FinishedQuiz = () => {
 
   const handleOnRetry = () => {
     dispatch({ type: "CLEAR_RESULTS" })
+    history.push(routes.activeQuiz.replace(":id", activeQuizId || ""))
+  }
+
+  const handleBackQuizzes = () => {
+    dispatch({ type: "CLEAR_ACTIVE_QUIZ" })
+    dispatch({ type: "CLEAR_RESULTS" })
+    history.push(routes.quizzes)
   }
 
   return (
@@ -47,7 +58,7 @@ export const FinishedQuiz = () => {
           <Button color={"primary"} disabled={false} click={handleOnRetry}>
             Repeat
           </Button>
-          <Button color={"success"} disabled={false} click={() => {}}>
+          <Button color={"success"} disabled={false} click={handleBackQuizzes}>
             Back to quiz
           </Button>
         </ButtonWrapper>

@@ -36,7 +36,7 @@ export const initialQuizzesState = [
     title: "Quizzes 2 ",
     questions: [
       {
-        id: "questId1",
+        id: "questId3",
         number: 1,
         title: "What is your name",
         answers: [
@@ -46,7 +46,7 @@ export const initialQuizzesState = [
         ]
       },
       {
-        id: "questId2",
+        id: "questId4",
         number: 2,
         title: "What is your mather's name",
         answers: [

@@ -5,19 +5,31 @@ import { StoreState } from "../redux"
 import { QuizT } from "../types"
 import { theme } from "../styles/theme"
 import { Backdrop } from "./backdrop"
+import { NavLink } from "react-router-dom"
 
 type Props = {
   isDrawerVisible: boolean
   onClose: () => void
 }
 
+const links = [
+  { to: "/", label: "List", exact: true },
+  { to: "/auth", label: "Authorization", exact: false },
+  { to: "/quiz-creator", label: "Create test", exact: false }
+]
+
 export const Drawer: React.FC<Props> = ({ isDrawerVisible, onClose }) => {
   const quizzes = useSelector<StoreState, QuizT[]>(state => state.quizzes)
 
+  const closeClickHandler = () => {
+    onClose()
+  }
   const renderLinks = () => {
-    return quizzes.map((quiz, index) => (
+    return links.map((link, index) => (
       <ListItem key={index}>
-        <LinkWrap>{quiz.title}</LinkWrap>
+        <NavLinkStyled to={link.to} exact={link.exact} onClick={closeClickHandler}>
+          {link.label}
+        </NavLinkStyled>
       </ListItem>
     ))
   }
@@ -52,7 +64,7 @@ const List = styled.ul`
 const ListItem = styled.li`
   margin-bottom: 15px;
 `
-const LinkWrap = styled.a`
+const NavLinkStyled = styled(NavLink)`
   color: #363d54;
   font-size: 30px;
   text-decoration: none;
